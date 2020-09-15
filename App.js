@@ -1,21 +1,28 @@
+import React, {useState} from 'react';
+import { StyleSheet, Text, View, Button, Image } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {NavigationContainer} from '@react-navigation/native'
+import {createStackNavigator} from '@react-navigation/stack'
 
-export default function App() {
+//import Constants from 'expo-constants';
+import Colors from './constants/colors';
+import HomeScreen from './screens/Home'
+import ProyectosScreen from './screens/Proyectos'
+import DetalleProyectoScreen from './screens/DetalleProyecto'
+
+function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home" screenOptions={{headerStyle: {backgroundColor: Colors.primary,},headerTintColor: '#fff',headerTitleStyle: {fontWeight: 'bold',},}}>
+        <Stack.Screen name="Home" component={HomeScreen} options={{title: 'Gesproy móvil'}}/>
+        <Stack.Screen name="Proyectos" component={ProyectosScreen} options={{title: 'Bandeja de proyectos'}}/>
+        <Stack.Screen name="DetalleProyecto" component={DetalleProyectoScreen} options={{title: 'Información del proyecto'}}/>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const Stack = createStackNavigator();
+
+
+export default App;
